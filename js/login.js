@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Login bem-sucedido
                 mensagem.textContent = `Bem-vindo, ${data.usuario.name}! Login realizado com sucesso.`;
                 // Redirecionar para a página principal ou dashboard
-                window.location.href = '/app_sistema_pizzaria/dashboard.html';  // Exemplo de redirecionamento
+                window.location.href = 'dashboard.html';  // Exemplo de redirecionamento
             } else {
                 // Erro no login
                 mensagem.textContent = 'Erro no login: ' + data.mensagem;

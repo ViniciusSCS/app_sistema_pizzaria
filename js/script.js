@@ -1,7 +1,13 @@
+// Este evento é disparado assim que o conteúdo HTML da página foi completamente carregado e processado.
+// Garante que o JavaScript só seja executado após a estrutura da página estar pronta.
 document.addEventListener("DOMContentLoaded", function() {
+    // Captura o formulário de registro através do seu ID 'registerForm'.
     const form = document.getElementById('registerForm');
+
+    // Captura o elemento onde será exibida a mensagem de sucesso ou erro ao usuário, através do ID 'mensagem'.
     const mensagem = document.getElementById('mensagem');
 
+    // Adiciona um ouvinte de evento que será disparado quando o formulário for enviado (submit).
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -12,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
             password_confirmation: document.getElementById('password_confirmation').value
         };
 
-        // Enviar os dados do usuário via API
+        // Realiza uma requisição HTTP para a API que irá processar o cadastro.
         fetch('http://localhost:8000/api/cadastrar', {
             method: 'POST',
             headers: {

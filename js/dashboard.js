@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.usuario.name) {
                 // Exibir o nome do usuário
                 welcomeMessage.textContent = `Bem-vindo, ${data.usuario.name}!`;

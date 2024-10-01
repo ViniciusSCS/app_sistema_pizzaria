@@ -20,15 +20,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 welcomeMessage.textContent = `Bem-vindo, ${data.usuario.name}!`;
             } else {
                 // Se não encontrar os dados do usuário, redirecionar para a página de login
-                window.location.href = '/app_sistema_pizzaria/login.html';
+                window.location.href = 'login.html';
             }
         })
         .catch(error => {
             console.log("Erro ao obter os dados do usuário:", error);
-            window.location.href = '/app_sistema_pizzaria/login.html'; // Redireciona se houver erro
+            window.location.href = 'login.html'; // Redireciona se houver erro
         });
     } else {
         // Redireciona para o login se o token não existir
-        window.location.href = '/app_sistema_pizzaria/login.html';
+        window.location.href = 'login.html';
     }
 });

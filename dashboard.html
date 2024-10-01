@@ -11,8 +11,19 @@
 
         <div class="container">
             <h2 id="welcomeMessage"></h2>
+            <button id="logoutBtn">Deslogar</button>
         </div>
 
         <script src="js/dashboard.js"></script>
     </body>
+
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Limpa o localStorage ao sair
+            localStorage.clear();
+    
+            // Redireciona para a página de login
+            window.location.href = 'login.html';
+        });
+    </script>
 </html>

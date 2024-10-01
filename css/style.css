@@ -34,3 +34,18 @@ button {
 button:hover {
     background-color: #218838;
 }
+
+.buttonBack {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white; /* Cor do texto */
+    background-color: #007BFF; /* Cor primária */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttonBack:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
+}

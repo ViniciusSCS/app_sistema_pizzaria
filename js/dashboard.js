@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => {
             console.log("Erro ao obter os dados do usuário:", error);
-            // window.location.href = '/app_sistema_pizzaria/login.html'; // Redireciona se houver erro
+            window.location.href = '/app_sistema_pizzaria/login.html'; // Redireciona se houver erro
         });
     } else {
         // Redireciona para o login se o token não existir

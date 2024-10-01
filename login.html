@@ -21,8 +21,16 @@
         </form>
 
         <div id="mensagem"></div>
+
+        <button id="backBtn" class="buttonBack">Página Inicial</button>
     </div>
 
     <script src="js/login.js"></script>
+    <script>
+        document.getElementById('backBtn').addEventListener('click', function() {
+            window.location.href = 'index.html';  // Redireciona para a página inicial
+        });
+    </script>
+
 </body>
 </html>

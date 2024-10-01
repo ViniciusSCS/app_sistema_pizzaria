@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login de Usuário</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <h1>Login</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login de Usuário</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <h1>Login</h1>
 
-    <div class="container">
-        <form id="loginForm">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <div class="container">
+            <form id="loginForm">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
 
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
 
-            <button type="submit">Entrar</button>
-        </form>
+                <button type="submit">Entrar</button>
+            </form>
 
-        <div id="mensagem"></div>
+            <div id="mensagem"></div>
 
-        <button id="backBtn" class="buttonBack">Página Inicial</button>
-    </div>
+            <button id="backBtn" class="buttonBack">Página Inicial</button>
+        </div>
 
-    <script src="js/login.js"></script>
-    <script>
-        document.getElementById('backBtn').addEventListener('click', function() {
-            window.location.href = 'index.html';  // Redireciona para a página inicial
-        });
-    </script>
+        <script src="js/login.js"></script>
+        <script>
+            document.getElementById('backBtn').addEventListener('click', function() {
+                window.location.href = 'index.html';  // Redireciona para a página inicial
+            });
+        </script>
 
-</body>
+    </body>
 </html>

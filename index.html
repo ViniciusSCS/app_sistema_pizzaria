@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Bem-vindo ao Sistema de Autenticação</h1>
-        <div class="button-group">
-            <button id="registerBtn">Registrar</button>
-            <button id="loginBtn">Login</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Página Inicial</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Bem-vindo ao Sistema de Autenticação</h1>
+            <div class="button-group">
+                <button id="registerBtn">Registrar</button>
+                <button id="loginBtn">Login</button>
+            </div>
         </div>
-    </div>
 
-    <script>
-        document.getElementById('registerBtn').addEventListener('click', function() {
-            window.location.href = 'register.html';  // Redireciona para a página de registro
-        });
+        <script>
+            document.getElementById('registerBtn').addEventListener('click', function() {
+                window.location.href = 'register.html';  // Redireciona para a página de registro
+            });
 
-        document.getElementById('loginBtn').addEventListener('click', function() {
-            window.location.href = 'login.html';  // Redireciona para a página de login
-        });
-    </script>
-</body>
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                window.location.href = 'login.html';  // Redireciona para a página de login
+            });
+        </script>
+    </body>
 </html>

@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => response.json())
         .then(data => {
+            
             if (data.status === 200) {
                 console.log("🚀 ~ form.addEventListener ~ data:", data);
                 localStorage.setItem('token', data.usuario.token);
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 window.location.href = 'dashboard.html';  // Exemplo de redirecionamento
             } else {
                 // Erro no login
-                mensagem.textContent = 'Erro no login: ' + data.mensagem;
+                mensagem.textContent = 'Erro no login: ' + data.message;
             }
         })
         .catch(error => {

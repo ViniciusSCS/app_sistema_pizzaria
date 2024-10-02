@@ -23,8 +23,7 @@ async function listarUsuarios() {
     
                 // Itera sobre os usuários e adiciona cada um à tabela
                 usuarios.user.data.forEach((usuario, index) => {
-                    console.log(usuario);
-                    
+
                     const dataCriacao = new Date(usuario.created_at);
                     const dataFormatada = dataCriacao.toLocaleString('pt-BR', {
                         day: '2-digit',
@@ -43,6 +42,7 @@ async function listarUsuarios() {
                         <td>${dataFormatada}</td>
                     `;
                     tabelaUsuarios.appendChild(row);
+                    
                 });
             } else {
                 throw new Error('Erro ao buscar os usuários');

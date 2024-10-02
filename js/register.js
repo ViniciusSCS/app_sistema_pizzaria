@@ -29,19 +29,16 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             if (data.status === 200) {
-                console.log("🚀 ~ form.addEventListener ~ data:", data);
                 // Sucesso no cadastro
                 mensagem.textContent = `Usuário ${user.name} foi cadastrado com sucesso! Bem-vindo(a)!`;
                 form.reset();
             } else {
                 // Erro no cadastro
-                console.log("🚀 ~ form.addEventListener ~ data error:", data);
-                mensagem.textContent = 'Erro no cadastro: ' + data.mensagem;
+                mensagem.textContent = 'Erro no cadastro: ' + data.message;
             }
         })
         .catch(error => {
             // Erro na comunicação com a API
-            console.log("🚀 ~ form.addEventListener ~ error:", error);
             mensagem.textContent = 'Erro ao realizar o cadastro. Tente novamente.';
         });
     });

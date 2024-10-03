@@ -40,7 +40,7 @@
             crossorigin="anonymous">
         </script>
         <script src="https://kit.fontawesome.com/2c682d9b74.js" crossorigin="anonymous"></script>
-        <script src="js/listar.js"></script>
+        <script src="js/app.js"></script>
         <script>
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 // Pega o token armazenado no localStorage
@@ -73,6 +73,15 @@
             });
         </script>
         <script>
+            document.getElementById('dashboardBtn').addEventListener('click', function() {
+                window.location.href = 'dashboard.html';
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', listarUsuarios);
+    
+            document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+    
             document.getElementById('dashboardBtn').addEventListener('click', function() {
                 window.location.href = 'dashboard.html';
             });

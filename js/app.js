@@ -91,11 +91,13 @@ async function listarUsuarios() {
                         <td>${usuario.email}</td>
                         <td>${dataFormatada}</td>
                         <td>
-                            ${usuario.id !== userIdLogado 
+                            ${
+                                usuario.id !== userIdLogado 
                                 ? `<button class="btn btn-danger btn-sm excluir-usuario" data-id="${usuario.id}">
                                     <i class="fas fa-trash-alt"></i>
                                    </button>`
-                                : ''}
+                                : ''
+                            }
                         </td>
                     `;
                     tabelaUsuarios.appendChild(row);

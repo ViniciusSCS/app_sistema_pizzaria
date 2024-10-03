@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             
             if (data.status === 200) {
-                console.log("🚀 ~ form.addEventListener ~ data:", data);
                 localStorage.setItem('token', data.usuario.token);
+                localStorage.setItem('userId', data.usuario.id);
                 // Login bem-sucedido
                 mensagem.textContent = `Bem-vindo, ${data.usuario.name}! Login realizado com sucesso.`;
                 // Redirecionar para a página principal ou dashboard

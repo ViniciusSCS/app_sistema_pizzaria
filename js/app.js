@@ -82,7 +82,7 @@ async function listarUsuarios() {
                         minute: '2-digit',
                         second: '2-digit',
                         hour12: false
-                    });
+                    });                    
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -92,7 +92,7 @@ async function listarUsuarios() {
                         <td>${dataFormatada}</td>
                         <td>
                             ${
-                                usuario.id !== userIdLogado 
+                                usuario.id != userIdLogado 
                                 ? `<button class="btn btn-danger btn-sm excluir-usuario" data-id="${usuario.id}">
                                     <i class="fas fa-trash-alt"></i>
                                    </button>`

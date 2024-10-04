@@ -1,7 +1,7 @@
 // Função para registrar o usuário
 async function registerUser(name, email, password) {
     try {
-        const response = await fetch('http://localhost:8000/api/register', {
+        const response = await fetch('http://localhost:8000/api/cadastrar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

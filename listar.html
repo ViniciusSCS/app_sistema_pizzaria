@@ -42,42 +42,6 @@
         <script src="https://kit.fontawesome.com/2c682d9b74.js" crossorigin="anonymous"></script>
         <script src="js/app.js"></script>
         <script>
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                // Pega o token armazenado no localStorage
-                const token = localStorage.getItem('token');
-    
-                // Faz a requisição para a rota de logout no backend
-                fetch('http://localhost:8000/api/logout', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + token, // Inclui o token de autenticação
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Se o logout foi bem-sucedido, limpa o localStorage
-                        localStorage.clear();
-    
-                        // Redireciona o usuário para a página de login
-                        window.location.href = 'login.html';
-                    } else {
-                        // Se houve algum erro no logout, exibe uma mensagem
-                        console.error('Erro ao deslogar');
-                    }
-                })
-                .catch(error => {
-                    // Em caso de falha na requisição
-                    console.error('Erro de rede ao tentar deslogar:', error);
-                });
-            });
-        </script>
-        <script>
-            document.getElementById('dashboardBtn').addEventListener('click', function() {
-                window.location.href = 'dashboard.html';
-            });
-        </script>
-        <script>
             document.addEventListener('DOMContentLoaded', listarUsuarios);
     
             document.getElementById('logoutBtn').addEventListener('click', logoutUser);

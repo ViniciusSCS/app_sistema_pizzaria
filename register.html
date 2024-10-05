@@ -57,10 +57,13 @@
         <script>
             document.getElementById('registerForm').addEventListener('submit', function(event) {
                 event.preventDefault();
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                registerUser(name, email, password);
+                const user = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    password_confirmation: document.getElementById('password_confirmation').value
+                };
+                registerUser(user);
             });
         </script>
     </body>

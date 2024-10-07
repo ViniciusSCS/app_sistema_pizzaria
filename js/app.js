@@ -1,5 +1,12 @@
 // Função para registrar o usuário
-async function registerUser(user) {    
+async function registerUser(user) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+        alert('A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
+        return;
+    }
+    
     try {
         const response = await fetch('http://localhost:8000/api/cadastrar', {
             method: 'POST',

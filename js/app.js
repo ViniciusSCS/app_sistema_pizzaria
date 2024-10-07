@@ -161,9 +161,7 @@ function visualizarUsuario(userId) {
         },
     })
     .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        
+    .then(data => {        
         // Preenche os dados do modal
         document.getElementById('usuarioNome').textContent = data.user.name;
         document.getElementById('usuarioEmail').textContent = data.user.email;

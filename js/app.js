@@ -2,14 +2,14 @@
 async function registerUser(user) {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!passwordRegex.test(password)) {
+    if (!passwordRegex.test(user.password)) {
         alert('A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
         return;
     }
 
     // Verifica se a confirmação da senha é igual à senha
     if (user.password !== user.password_confirmation) {
-        mensagem.textContent = 'A confirmação da senha não corresponde à senha.';
+        alert('A confirmação da senha não corresponde à senha.');
         return;
     }
 

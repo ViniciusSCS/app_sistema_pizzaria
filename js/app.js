@@ -22,6 +22,28 @@ async function registerUser(user) {
             body: JSON.stringify(user),
         });
 
+        if (!response.ok) {
+            // Se a resposta não for bem-sucedida, tenta capturar os erros de validação
+            const data = await response.json();
+            if (response.status === 302) {
+                // Exibe as mensagens de erro no frontend
+                const errors = data.errors;
+                let errorMessages = '';
+
+                for (const key in errors) {
+                    if (errors.hasOwnProperty(key)) {
+                        errorMessages += `${errors[key].join(' ')}\n`; // Concatena todas as mensagens de erro
+                    }
+                }
+
+                alert(errorMessages); // Exibe as mensagens de erro
+            } else {
+                // Exibe a mensagem de erro genérica, caso o status não seja 422
+                alert(`Erro: ${data.message}`);
+            }
+            return;
+        }
+
         const data = await response.json();
 
         if (data.status === 200) {
@@ -32,7 +54,7 @@ async function registerUser(user) {
         }
     } catch (error) {
         console.error('Erro ao cadastrar:', error);
-        alert('Erro ao cadastrar o usuário!');
+        alert('Erro ao cadastrar o usuário! ' + `${data.message}`);
     }
 }
 

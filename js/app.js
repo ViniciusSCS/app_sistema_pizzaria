@@ -95,8 +95,8 @@ async function listarUsuarios() {
                         minute: '2-digit',
                         second: '2-digit',
                         hour12: false
-                    });                    
-
+                    });
+                    
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${index + 1}</td>

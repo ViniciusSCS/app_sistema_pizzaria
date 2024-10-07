@@ -18,6 +18,20 @@ document.addEventListener("DOMContentLoaded", function() {
             password_confirmation: document.getElementById('password_confirmation').value
         };
 
+        // Validação da senha
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordRegex.test(user.password)) {
+            mensagem.textContent = 'A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.';
+            return;
+        }
+
+        // Verifica se a confirmação da senha é igual à senha
+        if (user.password !== user.password_confirmation) {
+            mensagem.textContent = 'A confirmação da senha não corresponde à senha.';
+            return;
+        }
+
         // Realiza uma requisição HTTP para a API que irá processar o cadastro.
         fetch('http://localhost:8000/api/cadastrar', {
             method: 'POST',

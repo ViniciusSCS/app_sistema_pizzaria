@@ -42,6 +42,9 @@ async function listarUsuarios() {
                         <td>${usuario.email}</td>
                         <td>${dataFormatada}</td>
                         <td>
+                            <button class="btn btn-info btn-sm visualizar-usuario" data-id="${usuario.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
                             ${
                                 usuario.id != userIdLogado
                                 ? `<button class="btn btn-danger btn-sm excluir-usuario" data-id="${usuario.id}">
@@ -63,6 +66,13 @@ async function listarUsuarios() {
                         if (confirmar) {
                             await excluirUsuario(userId);
                         }
+                    });
+                });
+
+                document.querySelectorAll('.visualizar-usuario').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const userId = this.getAttribute('data-id');
+                        visualizarUsuario(userId);
                     });
                 });
             } else {
@@ -102,6 +112,42 @@ async function excluirUsuario(userId) {
         console.error('Erro:', error);
         alert('Erro ao excluir o usuário.');
     }
+}
+
+function visualizarUsuario(userId) {
+    const token = localStorage.getItem('token');
+
+    fetch(`http://localhost:8000/api/user/visualizar/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {        
+        // Preenche os dados do modal
+        document.getElementById('usuarioNome').textContent = data.user.name;
+        document.getElementById('usuarioEmail').textContent = data.user.email;
+
+        const dataCriacao = new Date(data.user.created_at);
+        document.getElementById('usuarioDataCriacao').textContent = dataCriacao.toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+
+        // Abre o modal de visualização
+        const visualizarModal = new bootstrap.Modal(document.getElementById('visualizarUsuarioModal'));
+        visualizarModal.show();
+    })
+    .catch(error => {
+        console.error('Erro ao visualizar o usuário:', error);
+    });
 }
 
 // Chama a função para listar os usuários assim que a página for carregada

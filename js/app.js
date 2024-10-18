@@ -59,7 +59,7 @@ async function registerUser(user) {
 }
 
 // Função para login do usuário
-async function loginUser(email, password) {    
+async function loginUser(email, password) {
     try {
         const response = await fetch('http://localhost:8000/api/login', {
             method: 'POST',
@@ -129,6 +129,9 @@ async function listarUsuarios() {
                             <button class="btn btn-info btn-sm visualizar-usuario" data-id="${usuario.id}">
                                 <i class="fas fa-eye"></i>
                             </button>
+                            <button class="btn btn-primary btn-sm editar-usuario" data-id="${usuario.id}">
+                                <i class="fas fa-pen"></i>
+                            </button>
                             ${
                                 usuario.id != userIdLogado 
                                 ? `<button class="btn btn-danger btn-sm excluir-usuario" data-id="${usuario.id}">
@@ -149,6 +152,13 @@ async function listarUsuarios() {
                         if (confirmar) {
                             await excluirUsuario(userId);
                         }
+                    });
+                });
+
+                document.querySelectorAll('.editar-usuario').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const userId = this.getAttribute('data-id');
+                        editarUsuario(userId); // Chama a função para editar
                     });
                 });
 
@@ -208,6 +218,39 @@ function visualizarUsuario(userId) {
     });
 }
 
+async function editarUsuario(userId) {
+    const token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch(`http://localhost:8000/api/user/visualizar/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            // Preencher o formulário de edição com os dados do usuário
+            document.getElementById('editName').value = data.user.name;
+            document.getElementById('editEmail').value = data.user.email;
+            document.getElementById('userId').value = userId; // Esconde o ID do usuário no formulário
+
+            // Exibe o modal de edição (ou exibe um formulário em outro local)
+            // document.getElementById('editarUsuarioModal').style.display = 'block';
+            const editarUsuarioModal = new bootstrap.Modal(document.getElementById('editarUsuarioModal'));
+            editarUsuarioModal.show();
+        } else {
+            alert('Erro ao carregar os dados do usuário.');
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao carregar os dados do usuário.');
+    }
+}
+
 // Função para excluir o usuário
 async function excluirUsuario(userId) {
     const token = localStorage.getItem('token');
@@ -232,6 +275,33 @@ async function excluirUsuario(userId) {
     } catch (error) {
         console.error('Erro ao excluir o usuário:', error);
         alert('Erro ao excluir o usuário!');
+    }
+}
+
+async function atualizarUsuario(userUpdate, userId) {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`http://localhost:8000/api/user/atualizar/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userUpdate)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.status === 200) {
+            alert('Usuário atualizado com sucesso!');
+            document.getElementById('editarUsuarioModal').style.display = 'none'; // Fecha o modal
+            listarUsuarios(); // Atualiza a lista de usuários
+        } else {
+            alert('Erro ao atualizar o usuário: ' + data.message);
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar o usuário:', error);
+        alert('Erro ao atualizar o usuário.');
     }
 }
 

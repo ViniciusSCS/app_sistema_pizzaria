@@ -53,6 +53,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuário</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="editUserForm">
+                            <input type="hidden" id="userId"> <!-- Campo oculto para o ID do usuário --><div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="editName" class="form-label">Nome:</label>
+                                    <input type="text" class="form-control" id="editName" name="editName" required>
+                                </div>                
+                                <div class="mb-3">
+                                    <label for="editEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="editEmail" name="editEmail" placeholder="name@example.com" required>
+                                </div>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Atualizar Usuário</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
@@ -67,6 +95,17 @@
     
             document.getElementById('dashboardBtn').addEventListener('click', function() {
                 window.location.href = 'dashboard.html';
+            });
+        </script>
+        <script>
+            document.getElementById('editUserForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const userId = document.getElementById('userId').value;
+                const userUpdate = {
+                    name: document.getElementById('editName').value,
+                    email: document.getElementById('editEmail').value
+                };
+                atualizarUsuario(userUpdate, userId);
             });
         </script>
     </body>

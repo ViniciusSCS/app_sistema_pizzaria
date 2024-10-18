@@ -221,6 +221,20 @@ function visualizarUsuario(userId) {
 async function editarUsuario(userId) {
     const token = localStorage.getItem('token');
 
+    document.getElementById('alterarSenhaBtn').addEventListener('click', function() {
+        const senhaFields = document.getElementById('senhaFields');
+        const senhaConfirmationFields = document.getElementById('senhaConfirmationFields');
+    
+        // Alterna a visibilidade dos campos de senha
+        if (senhaFields.style.display === 'none') {
+            senhaFields.style.display = 'block';
+            senhaConfirmationFields.style.display = 'block';
+        } else {
+            senhaFields.style.display = 'none';
+            senhaConfirmationFields.style.display = 'none';
+        }
+    });
+
     try {
         const response = await fetch(`http://localhost:8000/api/user/visualizar/${userId}`, {
             method: 'GET',
@@ -280,6 +294,16 @@ async function excluirUsuario(userId) {
 
 async function atualizarUsuario(userUpdate, userId) {
     const token = localStorage.getItem('token');
+
+    // Adiciona as senhas ao objeto userUpdate se elas foram preenchidas
+    const newPassword = document.getElementById('editPassword').value;
+    const passwordConfirmation = document.getElementById('editPasswordConfirmation').value;
+
+    if (newPassword) {
+        userUpdate.password = newPassword; // Adiciona nova senha se foi informada
+        userUpdate.password_confirmation = passwordConfirmation; // Adiciona confirmação de senha
+    }
+
     try {
         const response = await fetch(`http://localhost:8000/api/user/atualizar/${userId}`, {
             method: 'PUT',
@@ -294,7 +318,8 @@ async function atualizarUsuario(userUpdate, userId) {
 
         if (response.ok && data.status === 200) {
             alert('Usuário atualizado com sucesso!');
-            document.getElementById('editarUsuarioModal').style.display = 'none'; // Fecha o modal
+            const editarUsuarioModal = bootstrap.Modal.getInstance(document.getElementById('editarUsuarioModal'));
+            editarUsuarioModal.hide(); // Fecha o modal de edição
             listarUsuarios(); // Atualiza a lista de usuários
         } else {
             alert('Erro ao atualizar o usuário: ' + data.message);

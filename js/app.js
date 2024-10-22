@@ -272,6 +272,19 @@ async function atualizarUsuario(userUpdate, userId) {
     const newPassword = document.getElementById('editPassword').value;
     const passwordConfirmation = document.getElementById('editPasswordConfirmation').value;
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!passwordRegex.test(newPassword)) {
+        alert('A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
+        return;
+    }
+
+    // Verifica se a confirmação da senha é igual à senha
+    if (newPassword !== passwordConfirmation) {
+        alert('A confirmação da senha não corresponde à senha.');
+        return;
+    }
+
     if (newPassword) {
         userUpdate.password = newPassword; // Adiciona nova senha se foi informada
         userUpdate.password_confirmation = passwordConfirmation; // Adiciona confirmação de senha
@@ -308,7 +321,7 @@ async function excluirUsuario(userId) {
     const token = localStorage.getItem('token');
     
     try {
-        const response = await fetch(`http://localhost:8000/api/deletar/${userId}`, {
+        const response = await fetch(`http://localhost:8000/api/user/deletar/${userId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

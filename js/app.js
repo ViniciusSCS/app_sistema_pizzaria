@@ -265,33 +265,6 @@ async function editarUsuario(userId) {
     }
 }
 
-// Função para excluir o usuário
-async function excluirUsuario(userId) {
-    const token = localStorage.getItem('token');
-    
-    try {
-        const response = await fetch(`http://localhost:8000/api/deletar/${userId}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            alert('Usuário deletado com sucesso!');
-            listarUsuarios(); // Atualiza a lista de usuários
-        } else {
-            alert(`Erro: ${data.message}`);
-        }
-    } catch (error) {
-        console.error('Erro ao excluir o usuário:', error);
-        alert('Erro ao excluir o usuário!');
-    }
-}
-
 async function atualizarUsuario(userUpdate, userId) {
     const token = localStorage.getItem('token');
 
@@ -327,6 +300,33 @@ async function atualizarUsuario(userUpdate, userId) {
     } catch (error) {
         console.error('Erro ao atualizar o usuário:', error);
         alert('Erro ao atualizar o usuário.');
+    }
+}
+
+// Função para excluir o usuário
+async function excluirUsuario(userId) {
+    const token = localStorage.getItem('token');
+    
+    try {
+        const response = await fetch(`http://localhost:8000/api/deletar/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Usuário deletado com sucesso!');
+            listarUsuarios(); // Atualiza a lista de usuários
+        } else {
+            alert(`Erro: ${data.message}`);
+        }
+    } catch (error) {
+        console.error('Erro ao excluir o usuário:', error);
+        alert('Erro ao excluir o usuário!');
     }
 }
 

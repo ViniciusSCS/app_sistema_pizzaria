@@ -108,23 +108,16 @@ async function listarUsuarios() {
                 tabelaUsuarios.innerHTML = '';
 
                 usuarios.user.data.forEach((usuario, index) => {
-                    const dataCriacao = new Date(usuario.created_at);
-                    const dataFormatada = dataCriacao.toLocaleString('pt-BR', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        hour12: false
-                    });
+                    const dataCriacao = formataData(usuario.created_at);
+                    const dataAtualizacao = formataData(usuario.updated_at);                    
                     
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${index + 1}</td>
                         <td>${usuario.name}</td>
                         <td>${usuario.email}</td>
-                        <td>${dataFormatada}</td>
+                        <td>${dataCriacao}</td>
+                        <td>${dataAtualizacao}</td>
                         <td>
                             <button class="btn btn-info btn-sm visualizar-usuario" data-id="${usuario.id}">
                                 <i class="fas fa-eye"></i>
@@ -197,17 +190,8 @@ function visualizarUsuario(userId) {
         // Preenche os dados do modal
         document.getElementById('usuarioNome').textContent = data.user.name;
         document.getElementById('usuarioEmail').textContent = data.user.email;
-
-        const dataCriacao = new Date(data.user.created_at);
-        document.getElementById('usuarioDataCriacao').textContent = dataCriacao.toLocaleString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        });
+        document.getElementById('usuarioDataCriacao').textContent = formataData(data.user.created_at)
+        document.getElementById('usuarioDataAtualizacao').textContent = formataData(data.user.updated_at)
 
         // Abre o modal de visualização
         const visualizarModal = new bootstrap.Modal(document.getElementById('visualizarUsuarioModal'));
@@ -272,20 +256,20 @@ async function atualizarUsuario(userUpdate, userId) {
     const newPassword = document.getElementById('editPassword').value;
     const passwordConfirmation = document.getElementById('editPasswordConfirmation').value;
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    if (!passwordRegex.test(newPassword)) {
-        alert('A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
-        return;
-    }
-
-    // Verifica se a confirmação da senha é igual à senha
-    if (newPassword !== passwordConfirmation) {
-        alert('A confirmação da senha não corresponde à senha.');
-        return;
-    }
-
     if (newPassword) {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordRegex.test(newPassword)) {
+            alert('A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
+            return;
+        }
+
+        // Verifica se a confirmação da senha é igual à senha
+        if (newPassword !== passwordConfirmation) {
+            alert('A confirmação da senha não corresponde à senha.');
+            return;
+        }
+
         userUpdate.password = newPassword; // Adiciona nova senha se foi informada
         userUpdate.password_confirmation = passwordConfirmation; // Adiciona confirmação de senha
     }
@@ -403,4 +387,20 @@ function carregarDashboard() {
         // Redireciona para o login se o token não existir
         window.location.href = 'login.html';
     }
+}
+
+function formataData(date){
+    const data = new Date(date);    
+
+    const dataFormatada = data.toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+
+    return dataFormatada;
 }
